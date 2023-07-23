@@ -6,7 +6,7 @@ const storySchema = mongoose.Schema({
     username:{type:String,require:true},
     userId:{type:String,require:true},
     image:{type:String,require:true},
-    tag:String,
+    tags:{type:String},
     likes:{type:Number,default:0},
     postDate:{type:Date,default:new Date()},
 });
