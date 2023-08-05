@@ -3,13 +3,17 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import StoryRoutes from './routes/stories.js';
+import UserRoutes from './routes/users.js';
+import dotenv from 'dotenv';
 const app = express();
 
 app.use(bodyParser.json({limit:"32mb",extended:true}));
 app.use(bodyParser.urlencoded({limit:"32mb",extended:true}));
 app.use(cors());
 app.use("/stories",StoryRoutes);
-const MONGO_URI="mongodb+srv://Akash:Akash@cluster0.jmrbbba.mongodb.net/?retryWrites=true&w=majority";
+app.use("/user",UserRoutes);
+dotenv.config();
+const MONGO_URI=process.env.MONGO_URI;
 
 const PORT = process.env.PORT || 5001;
 

@@ -4,6 +4,7 @@ import { EditOutlined, DeleteTwoTone, HeartTwoTone } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import moment from 'moment';
 import styles from './style';
+import { deleteStory, likeStory } from '../../actions/stories';
 // import { deleteStory, likeStory } from '../../actions/stories';
 
 const { Meta } = Card;
@@ -14,14 +15,14 @@ function Story({ story, setSelectedId }) {
   const [expand, setExpand] = useState(true);
   
   const user = JSON.parse(localStorage.getItem("profile"));
-  console.log(story); 
+  
   const cardActions = [
     <div style={styles.actions}>
       <Tooltip
         placement='top'
         title='Like'
         color='magenta'
-        // onClick={() => { dispatch(likeStory(story._id)) }}
+         onClick={() => { dispatch(likeStory(story._id)) }}
       >
         <HeartTwoTone twoToneColor="magenta" />
         &nbsp; {story.likes.length} &nbsp;
@@ -40,7 +41,7 @@ function Story({ story, setSelectedId }) {
       title='Delete'
       color='red'
     >
-      <DeleteTwoTone twoToneColor="red"  />
+      <DeleteTwoTone twoToneColor="red" onClick={()=>dispatch(deleteStory(story._id))} />
     </Tooltip>
   ];
 
@@ -73,9 +74,9 @@ function Story({ story, setSelectedId }) {
       >
         {story.caption}
       </Paragraph>
-      {expand ?
+       {/* {expand ?
         <Link href="#">{story.tags.split(" ").map((tag) => `#${tag} `)}</Link>
-        : null }
+        : null }  */}
         <br />
         <Text type="secondary">{moment(story.postDate).fromNow()}</Text>
     </Card>
